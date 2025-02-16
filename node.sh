@@ -11,7 +11,10 @@ read node_name
 echo "Masukkan Locid: "
 read locid
 
-default_ram_disk=1600000
+total_memory=16000000
+memory_overallocation=0
+total_disk_space=11600000000
+disk_overallocation=0
 
 cd /var/www/pterodactyl || { echo "Direktori tidak ditemukan"; exit 1; }
 
@@ -29,21 +32,17 @@ $domain
 yes
 no
 no
-$default_ram_disk
-$default_ram_disk
-0
-0
+$total_memory
+$memory_overallocation
+$total_disk_space
+$disk_overallocation
 100
 8080
 2022
 /var/lib/pterodactyl/volumes
 EOF
 
-php artisan p:node:allocation <<EOF
-$node_name
-0.0.0.0
-HOSTING
-2000-2500
-EOF
+# Pterodactyl tidak punya command p:node:allocation, pakai API atau manual di panel
+echo "Silakan tambahkan port allocation secara manual di panel atau gunakan API."
 
-echo "Proses pembuatan lokasi, node, dan port allocation telah selesai."
+echo "Proses pembuatan lokasi dan node telah selesai."
